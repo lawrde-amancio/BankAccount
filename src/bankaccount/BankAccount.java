@@ -11,22 +11,40 @@ public class BankAccount {
 
     public void deposit(double amount) {
         if (isFrozen) {
-            System.out.println("Account is frozen. Cannot deposit.");
+            System.out.println("Account is FROZEN.");
+            System.out.println("Unable to transact");
             return;
+        } else if (amount == 0) {
+            System.out.printf("Amount deposited: %.1f\n", amount);
+            System.out.println("Invalid amount. Must be greater than 0");
+        } else if (amount < 0) {
+            System.out.printf("Amount deposited: %.1f\n", amount);
+            System.out.println("Invalid amount. Must be greater than 0");
+        } else {
+            balance += amount;
+            System.out.printf("Amount deposited: %.2f\n", amount);
+            System.out.printf("Current balance: %.2f\n", balance);
         }
-        balance += amount;
+
     }
 
     public void withdraw(double amount) {
         if (isFrozen) {
-            System.out.println("Account is frozen. Cannot withdraw.");
+            System.out.println("Account is FROZEN.");
+            System.out.println("Unable to transact.");
             return;
+        } else if (amount <= 0) {
+            System.out.printf("Amount withdrawn: %.1f\n", amount);
+            System.out.printf("Invalid amount. Must be greater than 0\n");
+        } else if (amount < balance) {
+            System.out.printf("Amount withdrawn: %.1f\n", amount);
+            balance -= amount;
+            System.out.printf("Current balance: %.2f\n", balance);
+        } else if (amount > balance) {
+            System.out.printf("Amount withdrawn: %.1f\n", amount);
+            System.out.println("Insufficient balance.");
+            System.out.printf("Current balance: %.2f\n", balance);
         }
-        if (amount > balance) {
-            System.out.println("Insufficient funds. Cannot withdraw.");
-            return;
-        }
-        balance -= amount;
     }
 
     public void getBalance() {
@@ -35,7 +53,6 @@ public class BankAccount {
 
     public void freezeAccount() {
         isFrozen = true;
-        System.out.println("Account has been frozen.");
     }
 
     public void unfreezeAccount() {
