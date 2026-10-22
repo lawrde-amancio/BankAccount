@@ -1,5 +1,8 @@
 package bankaccount;
 
+/**
+ * Represents the savings account and the owner.
+ */
 public class SavingsAccount extends BankAccount  {
     public String ownerName;
     

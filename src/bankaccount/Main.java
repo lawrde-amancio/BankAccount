@@ -1,7 +1,18 @@
 package bankaccount;
 
+/**
+ * Main.
+ */
 public class Main {
+
+    /**
+     * Test cases.
+     *
+     * @param args Run test cases.
+     */
     public static void main(String[] args) {
+
+        //TEST CASES//
 
         // 1. Create a savings account
         BankAccount acc1 = new SavingsAccount("Test0");

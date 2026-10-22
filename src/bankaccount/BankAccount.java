@@ -1,5 +1,8 @@
 package bankaccount;
 
+/**
+ * Represents the bank account, deposit, withdraw, getBalance, Freeze, unFreeze and isFrozen.
+ */
 public class BankAccount {
     private double balance;
     private boolean isFrozen;
@@ -9,6 +12,11 @@ public class BankAccount {
         this.isFrozen = false;
     }
 
+    /**
+     * Deposit function.
+     *
+     * @param amount Deposit function.
+     */
     public void deposit(double amount) {
         if (isFrozen) {
             System.out.println("Account is FROZEN.");
@@ -28,6 +36,11 @@ public class BankAccount {
 
     }
 
+    /**
+     * Withdraw function.
+     *
+     * @param amount Withdraw function.
+     */
     public void withdraw(double amount) {
         if (isFrozen) {
             System.out.println("Account is FROZEN.");
@@ -60,6 +73,9 @@ public class BankAccount {
         System.out.println("Account has been unfrozen.");
     }
 
+    /**
+     * Frozen.
+     */
     public void isFrozen() {
         if (isFrozen) {
             System.out.println("Account is currently frozen.");
