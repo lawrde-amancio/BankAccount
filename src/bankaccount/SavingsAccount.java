@@ -4,13 +4,11 @@ package bankaccount;
  * Represents the savings account and the owner.
  */
 public class SavingsAccount extends BankAccount  {
-    public String ownerName;
-    
     public SavingsAccount(String ownerName) {
-        this.ownerName = ownerName;
+        super(ownerName);
     }
 
     public String getOwnerName() {
-        return ownerName;
+        return getAccountHolderName();
     }
 }

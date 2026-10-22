@@ -1,21 +1,32 @@
 package bankaccount;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Represents the bank account, deposit, withdraw, getBalance, Freeze, unFreeze and isFrozen.
  */
 public class BankAccount {
     private double balance;
     private boolean isFrozen;
+    private String accountHolderName;
+    private List<Transaction> transactionHistory;
 
-    public BankAccount() {
+    // public BankAccount() {
+    //     this("Unknown");
+    // }
+
+    public BankAccount(String accountHolderName) {
         this.balance = 0.0;
         this.isFrozen = false;
+        this.accountHolderName = accountHolderName;
+        this.transactionHistory = new ArrayList<>();
     }
 
     /**
      * Deposit function.
      *
-     * @param amount Deposit function.
+     * @param amount Deposit amount.
      */
     public void deposit(double amount) {
         if (isFrozen) {
@@ -32,14 +43,16 @@ public class BankAccount {
             balance += amount;
             System.out.printf("Amount deposited: %.2f\n", amount);
             System.out.printf("Current balance: %.2f\n", balance);
+            transactionHistory.add(new Transaction("Deposit", amount));
         }
+        
 
     }
 
     /**
      * Withdraw function.
      *
-     * @param amount Withdraw function.
+     * @param amount Withdraw amount.
      */
     public void withdraw(double amount) {
         if (isFrozen) {
@@ -58,10 +71,15 @@ public class BankAccount {
             System.out.println("Insufficient balance.");
             System.out.printf("Current balance: %.2f\n", balance);
         }
+        transactionHistory.add(new Transaction("Withdraw", amount));
     }
 
-    public void getBalance() {
-        System.out.println("Current balance: " + balance);
+    public double getBalance() {
+        return balance;
+    }
+
+    public String getAccountHolderName() {
+        return accountHolderName;
     }
 
     public void freezeAccount() {
@@ -81,6 +99,21 @@ public class BankAccount {
             System.out.println("Account is currently frozen.");
         } else {
             System.out.println("Account is not frozen.");
+        }
+    }
+
+    public List<Transaction> getTransactionHistory() {
+        return transactionHistory;
+    }
+
+    public void printTransactionHistory() {
+        if (transactionHistory.isEmpty()) {
+            System.out.println("No transactions yet.");
+            return;
+        }
+
+        for (Transaction transaction : transactionHistory) {
+            System.out.println(transaction);
         }
     }
 
