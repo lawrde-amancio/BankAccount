@@ -1,8 +1,8 @@
 package bankaccount;
 
 public class BankAccount {
-    public double balance;
-    public boolean isFrozen;
+    private double balance;
+    private boolean isFrozen;
 
     public BankAccount() {
         this.balance = 0.0;
