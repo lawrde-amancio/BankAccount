@@ -12,7 +12,7 @@ public class BankAccount {
     public void deposit(double amount) {
         if (isFrozen) {
             System.out.println("Account is FROZEN.");
-            System.out.println("Unable to transact");
+            System.out.println("Unable to transact.");
             return;
         } else if (amount == 0) {
             System.out.printf("Amount deposited: %.1f\n", amount);
