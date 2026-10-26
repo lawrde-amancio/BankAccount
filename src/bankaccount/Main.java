@@ -1,5 +1,11 @@
 package bankaccount;
 
+import java.util.List;
+
+import exception.AccountFrozenException;
+import exception.InsufficientFundsException;
+import exception.InvalidAmountException;
+
 /**
  * Main.
  */
@@ -12,7 +18,7 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        //TEST CASES//
+        // TEST CASES//
 
         // 1. Create a savings account
         BankAccount acc1 = new SavingsAccount("Test0");
@@ -20,50 +26,132 @@ public class Main {
         System.out.println("Account Owner: " + owner.getOwnerName() + ".");
 
         // 2. Deposit with valid amount
-        acc1.deposit(1000.125);
+        try {
+            acc1.deposit(1000.125);
+        } catch (AccountFrozenException | InvalidAmountException e) {
+            System.out.println(e.getMessage());
+        }
 
         // 3. Deposit with zero amount
-        acc1.deposit(0);
+        try {
+            acc1.deposit(0);
+        } catch (AccountFrozenException | InvalidAmountException e) {
+            System.out.println(e.getMessage());
+        }
 
         // 4. Deposit with negative amount
-        acc1.deposit(-500);
+        try {
+            acc1.deposit(-500);
+        } catch (AccountFrozenException | InvalidAmountException e) {
+            System.out.println(e.getMessage());
+        }
 
         // 5. Withdraw with sufficient funds
-        acc1.withdraw(500);
+        try {
+            acc1.withdraw(500);
+        } catch (AccountFrozenException | InvalidAmountException | InsufficientFundsException e) {
+            System.out.println(e.getMessage());
+        }
 
         // 6. Withdraw with insufficient funds
-        acc1.withdraw(1500);
+        try {
+            acc1.withdraw(1500);
+        } catch (AccountFrozenException | InvalidAmountException | InsufficientFundsException e) {
+            System.out.println(e.getMessage());
+        }
 
         // 7. Withdraw with negative amount
-        acc1.withdraw(-100);
+        try {
+            acc1.withdraw(-100);
+        } catch (AccountFrozenException | InvalidAmountException | InsufficientFundsException e) {
+            System.out.println(e.getMessage());
+        }
 
         // 8. Deposit when account is frozen
-        acc1.freezeAccount();
-        acc1.deposit(11500);
+        try {
+            acc1.freezeAccount();
+            acc1.deposit(11500);
+        } catch (AccountFrozenException | InvalidAmountException e) {
+            System.out.println(e.getMessage());
+        }
 
         // 9. Withdraw when account is frozen
-        acc1.withdraw(500);
+        try {
+            acc1.withdraw(500);
+        } catch (AccountFrozenException | InvalidAmountException | InsufficientFundsException e) {
+            System.out.println(e.getMessage());
+        }
 
         // 10. Unfreeze account and withdraw
-        acc1.unfreezeAccount();
-        acc1.withdraw(100);
 
+        try {
+            acc1.unfreezeAccount();
+            acc1.withdraw(100);
+        } catch (AccountFrozenException | InvalidAmountException | InsufficientFundsException e) {
+            System.out.println(e.getMessage());
+        }
 
-        //EXERCISE 2//
-        //1. Display transaction history of acc1.
+        // EXERCISE 2//
+        // 1. Display transaction history of acc1.
         acc1.printTransactionHistory();
 
-        //2. Create a Bank Account Manager
+        // 2. Create a Bank Account Manager
         BankAccountManager accM1 = new BankAccountManager();
 
-        //3. Add acc1 under the Bank Account Manager
+        // 3. Add acc1 under the Bank Account Manager
         accM1.addAccount(acc1);
 
-        //4. Create a new account under Bank Account Manager
+        // 4. Create a new account under Bank Account Manager
         accM1.addAccount(new SavingsAccount("Test1"));
 
-        //5. List all the created account under Bank Account Manager
+        // 5. List all the created account under Bank Account Manager
         accM1.listAccounts();
+
+        // Exercise 3
+
+        // 1. Deposit with negative amount
+        try {
+            acc1.deposit(-500);
+        } catch (InvalidAmountException | AccountFrozenException e) {
+            System.out.println(e.getMessage());
+        }
+
+        // 2. Deposit when account is frozen
+        try {
+            acc1.freezeAccount();
+            acc1.deposit(11500);
+        } catch (AccountFrozenException | InvalidAmountException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            acc1.unfreezeAccount();
+        }
+        // 3. Withdraw with negative amount
+        try {
+            acc1.withdraw(-100);
+        } catch (InvalidAmountException | AccountFrozenException | InsufficientFundsException e) {
+            System.out.println(e.getMessage());
+        }
+        // 4. Withdraw with insufficient funds
+        try {
+            acc1.withdraw(1500);
+        } catch (InsufficientFundsException | AccountFrozenException | InvalidAmountException e) {
+            System.out.println(e.getMessage());
+        }
+        // 5. Withdraw when account is frozen
+        try {
+            acc1.freezeAccount();
+            acc1.withdraw(500);
+        } catch (AccountFrozenException | InvalidAmountException | InsufficientFundsException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            acc1.unfreezeAccount();
+        }
+        // 6. Filter transaction at or above a certain amount.
+        List<Transaction> filtered = accM1.filterTransactionsAtOrAbove(200, acc1.getTransactionHistory());
+        System.out.println(filtered);
+        // 7. Sort transaction by amount.The top most has the lowest amount value.
+        List<Transaction> sorted = accM1.sortTransactionsByAmount(acc1.getTransactionHistory());
+        System.out.println(sorted);
 
     }
 }

@@ -1,7 +1,9 @@
 package bankaccount;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * BankAccountManager.
@@ -16,10 +18,12 @@ public class BankAccountManager implements Bank {
         this.id = 0;
     }
 
-    /**    (non-Javadoc)
+    /**
+     * (non-Javadoc)
      * Bank Accounts.
      *
-     * @see bankaccount.Bank#addAccount(bankaccount.BankAccount) Represents adding of Accounts.
+     * @see bankaccount.Bank#addAccount(bankaccount.BankAccount) Represents adding
+     *      of Accounts.
      */
     public void addAccount(BankAccount account) {
         if (accounts.size() >= MAX_ACCOUNTS) {
@@ -42,11 +46,23 @@ public class BankAccountManager implements Bank {
         for (Map.Entry<Integer, BankAccount> entry : accounts.entrySet()) {
             int accountId = entry.getKey();
             BankAccount acc = entry.getValue();
-            System.out.println("Account ID: " + accountId + 
-                               ", Account Name: " + acc.getAccountHolderName() + 
-                               ", Balance: " + String.format("%.2f", acc.getBalance()));
+            System.out.println("Account ID: " + accountId +
+                    ", Account Name: " + acc.getAccountHolderName() +
+                    ", Balance: " + String.format("%.2f", acc.getBalance()));
         }
     }
-    
+
+    public List<Transaction> filterTransactionsAtOrAbove(
+            double amount, List<Transaction> txList) {
+        return txList.stream()
+                .filter(tx -> tx.getAmount() >= amount)
+                .collect(Collectors.toList());
+    }
+
+    public List<Transaction> sortTransactionsByAmount(List<Transaction> txList) {
+        return txList.stream()
+                .sorted((tx1, tx2) -> Double.compare(tx1.getAmount(), tx2.getAmount()))
+                .collect(Collectors.toList());
+    }
 
 }
