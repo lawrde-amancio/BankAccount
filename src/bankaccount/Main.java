@@ -65,12 +65,5 @@ public class Main {
         //5. List all the created account under Bank Account Manager
         accM1.listAccounts();
 
-
-
-
-
-
-
-
     }
 }

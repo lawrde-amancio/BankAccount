@@ -3,6 +3,9 @@ package bankaccount;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * BankAccountManager.
+ */
 public class BankAccountManager implements Bank {
     private Map<Integer, BankAccount> accounts;
     private int id;
@@ -13,6 +16,11 @@ public class BankAccountManager implements Bank {
         this.id = 0;
     }
 
+    /**    (non-Javadoc)
+     * Bank Accounts.
+     *
+     * @see bankaccount.Bank#addAccount(bankaccount.BankAccount) Represents adding of Accounts.
+     */
     public void addAccount(BankAccount account) {
         if (accounts.size() >= MAX_ACCOUNTS) {
             System.out.println("Maximum account limit reached.");
@@ -27,6 +35,9 @@ public class BankAccountManager implements Bank {
         return accounts.get(id);
     }
 
+    /**
+     * Represents List of Accounts.
+     */
     public void listAccounts() {
         for (Map.Entry<Integer, BankAccount> entry : accounts.entrySet()) {
             int accountId = entry.getKey();

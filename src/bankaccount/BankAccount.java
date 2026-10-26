@@ -13,10 +13,11 @@ public class BankAccount {
     private String accountHolderName;
     private List<Transaction> transactionHistory;
 
-    // public BankAccount() {
-    // this("Unknown");
-    // }
-
+    /**
+     * Bank Account.
+     *
+     * @param accountHolderName Represents the Bank Account.
+     */
     public BankAccount(String accountHolderName) {
         this.balance = 0.0;
         this.isFrozen = false;
@@ -27,7 +28,7 @@ public class BankAccount {
     /**
      * Deposit function.
      *
-     * @param amount Deposit amount.
+     * @param amount Represents the amount Deposit function.
      */
     public void deposit(double amount) {
         if (isFrozen) {
@@ -51,7 +52,7 @@ public class BankAccount {
     /**
      * Withdraw function.
      *
-     * @param amount Withdraw amount.
+     * @param amount Represents the amount Withdraw function.
      */
     public void withdraw(double amount) {
         if (isFrozen) {
@@ -94,9 +95,6 @@ public class BankAccount {
         System.out.println("Account has been unfrozen.");
     }
 
-    /**
-     * Frozen.
-     */
     public boolean isFrozen() {
         return isFrozen;
     }
@@ -105,6 +103,9 @@ public class BankAccount {
         return transactionHistory;
     }
 
+    /**
+     * Represents the printing of Transaction History.
+     */
     public void printTransactionHistory() {
         if (transactionHistory.isEmpty()) {
             System.out.println("No transactions yet.");
