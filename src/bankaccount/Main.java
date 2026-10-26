@@ -48,5 +48,22 @@ public class Main {
         acc1.unfreezeAccount();
         acc1.withdraw(100);
 
+
+        //EXERCISE 2//
+        //1. Display transaction history of acc1.
+        acc1.printTransactionHistory();
+
+        //2. Create a Bank Account Manager
+        BankAccountManager accM1 = new BankAccountManager();
+
+        //3. Add acc1 under the Bank Account Manager
+        accM1.addAccount(acc1);
+
+        //4. Create a new account under Bank Account Manager
+        accM1.addAccount(new SavingsAccount("Test1"));
+
+        //5. List all the created account under Bank Account Manager
+        accM1.listAccounts();
+
     }
 }
