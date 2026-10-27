@@ -1,5 +1,8 @@
 package exception;
 
+/**
+ * InvalidAmountException.
+ */
 public class InvalidAmountException extends Exception {
     private String message;
 

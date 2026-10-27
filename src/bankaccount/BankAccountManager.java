@@ -52,6 +52,13 @@ public class BankAccountManager implements Bank {
         }
     }
 
+    /**
+     * Filter Transactions.
+     *
+     * @param amount Amount to Filter Transactions.
+     * @param txList List of Transaction.
+     * @return Return List.
+     */
     public List<Transaction> filterTransactionsAtOrAbove(
             double amount, List<Transaction> txList) {
         return txList.stream()
@@ -59,6 +66,12 @@ public class BankAccountManager implements Bank {
                 .collect(Collectors.toList());
     }
 
+    /**
+     *Sorted Transactions.
+     *
+     * @param txList List of Transaction.
+     * @return Return Sorted List
+     */
     public List<Transaction> sortTransactionsByAmount(List<Transaction> txList) {
         return txList.stream()
                 .sorted((tx1, tx2) -> Double.compare(tx1.getAmount(), tx2.getAmount()))

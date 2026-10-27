@@ -49,21 +49,24 @@ public class Main {
         // 5. Withdraw with sufficient funds
         try {
             acc1.withdraw(500);
-        } catch (AccountFrozenException | InvalidAmountException | InsufficientFundsException e) {
+        } catch (AccountFrozenException | InvalidAmountException 
+            | InsufficientFundsException e) {
             System.out.println(e.getMessage());
         }
 
         // 6. Withdraw with insufficient funds
         try {
             acc1.withdraw(1500);
-        } catch (AccountFrozenException | InvalidAmountException | InsufficientFundsException e) {
+        } catch (AccountFrozenException | InvalidAmountException 
+            | InsufficientFundsException e) {
             System.out.println(e.getMessage());
         }
 
         // 7. Withdraw with negative amount
         try {
             acc1.withdraw(-100);
-        } catch (AccountFrozenException | InvalidAmountException | InsufficientFundsException e) {
+        } catch (AccountFrozenException | InvalidAmountException 
+            | InsufficientFundsException e) {
             System.out.println(e.getMessage());
         }
 
@@ -78,7 +81,8 @@ public class Main {
         // 9. Withdraw when account is frozen
         try {
             acc1.withdraw(500);
-        } catch (AccountFrozenException | InvalidAmountException | InsufficientFundsException e) {
+        } catch (AccountFrozenException | InvalidAmountException 
+            | InsufficientFundsException e) {
             System.out.println(e.getMessage());
         }
 
@@ -87,7 +91,8 @@ public class Main {
         try {
             acc1.unfreezeAccount();
             acc1.withdraw(100);
-        } catch (AccountFrozenException | InvalidAmountException | InsufficientFundsException e) {
+        } catch (AccountFrozenException | InvalidAmountException 
+            | InsufficientFundsException e) {
             System.out.println(e.getMessage());
         }
 
@@ -128,29 +133,32 @@ public class Main {
         // 3. Withdraw with negative amount
         try {
             acc1.withdraw(-100);
-        } catch (InvalidAmountException | AccountFrozenException | InsufficientFundsException e) {
+        } catch (InvalidAmountException | AccountFrozenException 
+            | InsufficientFundsException e) {
             System.out.println(e.getMessage());
         }
         // 4. Withdraw with insufficient funds
         try {
             acc1.withdraw(1500);
-        } catch (InsufficientFundsException | AccountFrozenException | InvalidAmountException e) {
+        } catch (InsufficientFundsException | AccountFrozenException 
+            | InvalidAmountException e) {
             System.out.println(e.getMessage());
         }
         // 5. Withdraw when account is frozen
         try {
             acc1.freezeAccount();
-            acc1.withdraw(500);
-        } catch (AccountFrozenException | InvalidAmountException | InsufficientFundsException e) {
+            acc1.withdraw(400);
+        } catch (AccountFrozenException | InvalidAmountException 
+            | InsufficientFundsException e) {
             System.out.println(e.getMessage());
-        } finally {
-            acc1.unfreezeAccount();
-        }
+        } 
         // 6. Filter transaction at or above a certain amount.
-        List<Transaction> filtered = accM1.filterTransactionsAtOrAbove(200, acc1.getTransactionHistory());
+        List<Transaction> filtered = 
+        accM1.filterTransactionsAtOrAbove(200, acc1.getTransactionHistory());
         System.out.println(filtered);
         // 7. Sort transaction by amount.The top most has the lowest amount value.
-        List<Transaction> sorted = accM1.sortTransactionsByAmount(acc1.getTransactionHistory());
+        List<Transaction> sorted = 
+        accM1.sortTransactionsByAmount(acc1.getTransactionHistory());
         System.out.println(sorted);
 
     }

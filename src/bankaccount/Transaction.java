@@ -25,7 +25,8 @@ public class Transaction {
     }
 
     public String toString() {
-        return "Transaction [Type=" + type + ", Amount=" + amount + ", Timestamp=" + time_stamp + "]";
+        return "Transaction [Type=" + type + ", Amount=" 
+        + amount + ", Timestamp=" + time_stamp + "]";
     }
 
      public double getAmount() {

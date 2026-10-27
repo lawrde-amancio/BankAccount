@@ -33,17 +33,18 @@ public class BankAccount {
      *
      * @param amount Represents the amount Deposit function.
      */
-    public void deposit(double amount) throws AccountFrozenException, InvalidAmountException  {
+    public void deposit(double amount) throws AccountFrozenException,
+            InvalidAmountException {
         if (isFrozen()) {
-            throw new AccountFrozenException("Account is FROZEN. Unable to transact.");
-            // System.out.println("Account is FROZEN.");
-            // System.out.println("Unable to transact.");
-            // return;
+            throw new 
+            AccountFrozenException("Account is FROZEN. Unable to transact.");
+
         }
 
         if (amount == 0 || amount < 0) {
             System.out.printf("Amount deposited: %.2f\n", amount);
-            throw new InvalidAmountException("Invalid amount. Must be greater than 0");
+            throw new 
+            InvalidAmountException("Invalid amount. Must be greater than 0");
         } else {
             balance += amount;
             System.out.printf("Amount deposited: %.2f\n", amount);
@@ -53,29 +54,32 @@ public class BankAccount {
 
     }
 
-
     /**
      * Withdraw function.
      *
      * @param amount Represents the amount Withdraw function.
      */
-    public void withdraw(double amount) throws AccountFrozenException, InvalidAmountException, InsufficientFundsException {
-        if (isFrozen) {
-            throw new AccountFrozenException("Account is FROZEN. Unable to transact.");
+    public void withdraw(double amount)
+            throws AccountFrozenException, InvalidAmountException, 
+            InsufficientFundsException {
+        if (isFrozen()) {
+            throw new 
+            AccountFrozenException("Account is FROZEN. Unable to transact.");
         }
 
         System.out.printf("Amount withdrawn: %.2f\n", amount);
 
         if (amount <= 0) {
-            throw new InvalidAmountException("Invalid amount. Must be greater than 0");
+            throw new 
+            InvalidAmountException("Invalid amount. Must be greater than 0");
 
         } else if (amount > balance) {
             System.out.println("Insufficient balance.");
             System.out.printf("Current balance: %.2f\n", balance);
-            throw new InsufficientFundsException("Insufficient balance.");
+            // throw new InsufficientFundsException("Insufficient balance.");
 
         } else if (amount <= balance) {
-            System.out.printf("Amount withdrawn: %.1f\n", amount);
+            // System.out.printf("Amount withdrawn: %.1f\n", amount);
             balance -= amount;
             System.out.printf("Current balance: %.2f\n", balance);
             transactionHistory.add(new Transaction("Withdraw", amount));
