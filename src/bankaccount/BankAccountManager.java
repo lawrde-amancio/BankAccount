@@ -22,7 +22,8 @@ public class BankAccountManager implements Bank {
      * (non-Javadoc)
      * Bank Accounts.
      *
-     * @see bankaccount.Bank#addAccount(bankaccount.BankAccount) Represents adding
+     *@see bankaccount.Bank#addAccount(bankaccount.BankAccount) 
+     Represents adding
      *      of Accounts.
      */
     public void addAccount(BankAccount account) {
@@ -74,7 +75,8 @@ public class BankAccountManager implements Bank {
      */
     public List<Transaction> sortTransactionsByAmount(List<Transaction> txList) {
         return txList.stream()
-                .sorted((tx1, tx2) -> Double.compare(tx1.getAmount(), tx2.getAmount()))
+                .sorted((tx1, tx2) -> 
+                Double.compare(tx1.getAmount(), tx2.getAmount()))
                 .collect(Collectors.toList());
     }
 
