@@ -62,6 +62,7 @@ public class BankAccountManager implements Bank {
      */
     public List<Transaction> filterTransactionsAtOrAbove(
             double amount, List<Transaction> txList) {
+                System.out.println("Filtering transactions at or above 200...");
         return txList.stream()
                 .filter(tx -> tx.getAmount() >= amount)
                 .collect(Collectors.toList());
@@ -74,6 +75,7 @@ public class BankAccountManager implements Bank {
      * @return Return Sorted List
      */
     public List<Transaction> sortTransactionsByAmount(List<Transaction> txList) {
+        System.out.println("Sorting transactions by amount...");
         return txList.stream()
                 .sorted((tx1, tx2) -> 
                 Double.compare(tx1.getAmount(), tx2.getAmount()))

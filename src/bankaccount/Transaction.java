@@ -15,7 +15,7 @@ public class Transaction {
     /**
      * Transaction.
      *
-     * @param type Represent the Transaction type.
+     * @param type   Represent the Transaction type.
      * @param amount Represent the Transaction amount.
      */
     public Transaction(String type, double amount) {
@@ -26,15 +26,20 @@ public class Transaction {
     }
 
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        String formattedTime = time_stamp.format(formatter);
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    
+    return String.format(
+        "Transaction {\n" +
+        "  Type      : %s\n" +
+        "  Amount    : %.2f\n" +
+        "  Date/Time : %s\n" +
+        "}",
+        type, amount, time_stamp.format(formatter)
+    );
+}
 
-        return "Transaction [Type=" + type + ", Amount=" 
-        + amount + ", Timestamp=" + formattedTime + "]";
-    }
-
-     public double getAmount() {
+    public double getAmount() {
         return amount;
     }
-    
+
 }

@@ -15,6 +15,10 @@ public class BankAccount {
     private boolean isFrozen;
     private String accountHolderName;
     private List<Transaction> transactionHistory;
+    private String accountFrozenMessage = 
+    "Account is FROZEN. Unable to transact.";
+    private String invalidAmountMessage = 
+    "Invalid amount. Must be greater than 0";
 
     /**
      * Bank Account.
@@ -33,25 +37,23 @@ public class BankAccount {
      *
      * @param amount Represents the amount Deposit function.
      */
-    public void deposit(double amount) throws AccountFrozenException,
-            InvalidAmountException {
-        if (isFrozen()) {
-            throw new 
-            AccountFrozenException("Account is FROZEN. Unable to transact.");
-
-        }
-
-        if (amount == 0 || amount < 0) {
+    public void deposit(double amount) {
+        try {
+            if (isFrozen()) {
+                throw new AccountFrozenException(accountFrozenMessage);
+            }
             System.out.printf("Amount deposited: %.2f\n", amount);
-            throw new 
-            InvalidAmountException("Invalid amount. Must be greater than 0");
-        } else {
+            if (amount <= 0) {
+                throw new InvalidAmountException(invalidAmountMessage);
+            }
+
             balance += amount;
-            System.out.printf("Amount deposited: %.2f\n", amount);
             System.out.printf("Current balance: %.2f\n", balance);
             transactionHistory.add(new Transaction("Deposit", amount));
-        }
 
+        } catch (AccountFrozenException | InvalidAmountException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -59,30 +61,31 @@ public class BankAccount {
      *
      * @param amount Represents the amount Withdraw function.
      */
-    public void withdraw(double amount)
-            throws AccountFrozenException, InvalidAmountException, 
-            InsufficientFundsException {
-        if (isFrozen()) {
-            throw new 
-            AccountFrozenException("Account is FROZEN. Unable to transact.");
-        }
+    public void withdraw(double amount) {
+        try {
+            if (isFrozen()) {
+                throw new AccountFrozenException(accountFrozenMessage);
+            }
 
-        System.out.printf("Amount withdrawn: %.2f\n", amount);
+            System.out.printf("Amount withdrawn: %.2f\n", amount);
 
-        if (amount <= 0) {
-            throw new 
-            InvalidAmountException("Invalid amount. Must be greater than 0");
+            if (amount <= 0) {
+                throw new InvalidAmountException(invalidAmountMessage);
+            }
 
-        } else if (amount > balance) {
-            System.out.println("Insufficient balance.");
-            System.out.printf("Current balance: %.2f\n", balance);
-            // throw new InsufficientFundsException("Insufficient balance.");
+            if (amount > balance) {
+                System.out.println("Insufficient balance.");
+                System.out.printf("Current balance: %.2f\n", balance);
+                throw new InsufficientFundsException("Insufficient balance.");
+            }
 
-        } else if (amount <= balance) {
-            // System.out.printf("Amount withdrawn: %.1f\n", amount);
             balance -= amount;
             System.out.printf("Current balance: %.2f\n", balance);
             transactionHistory.add(new Transaction("Withdraw", amount));
+
+        } catch (AccountFrozenException | InvalidAmountException 
+            | InsufficientFundsException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -100,7 +103,6 @@ public class BankAccount {
 
     public void unfreezeAccount() {
         isFrozen = false;
-        System.out.println("Account has been unfrozen.");
     }
 
     public boolean isFrozen() {
