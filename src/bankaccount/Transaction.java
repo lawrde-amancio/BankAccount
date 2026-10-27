@@ -1,6 +1,7 @@
 package bankaccount;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * 
@@ -25,8 +26,11 @@ public class Transaction {
     }
 
     public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        String formattedTime = time_stamp.format(formatter);
+
         return "Transaction [Type=" + type + ", Amount=" 
-        + amount + ", Timestamp=" + time_stamp + "]";
+        + amount + ", Timestamp=" + formattedTime + "]";
     }
 
      public double getAmount() {
