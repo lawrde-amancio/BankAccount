@@ -19,6 +19,7 @@ public class BankAccount {
     "Account is FROZEN. Unable to transact.";
     private String invalidAmountMessage = 
     "Invalid amount. Must be greater than 0";
+    private String insufficientFundMessage = "Insufficient balance.";
 
     /**
      * Bank Account.
@@ -74,9 +75,8 @@ public class BankAccount {
             }
 
             if (amount > balance) {
-                System.out.println("Insufficient balance.");
                 System.out.printf("Current balance: %.2f\n", balance);
-                throw new InsufficientFundsException("Insufficient balance.");
+                throw new InsufficientFundsException(insufficientFundMessage);
             }
 
             balance -= amount;
